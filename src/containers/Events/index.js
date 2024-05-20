@@ -16,7 +16,8 @@ const EventList = () => {
   const filteredEvents = (
     (!type
       ? data?.events
-      : data?.events) || []
+      : // Fixing condition to filter events
+        data?.events.filter((event) => event.type === type)) || []
   ).filter((event, index) => {
     if (
       (currentPage - 1) * PER_PAGE <= index &&
@@ -39,7 +40,10 @@ const EventList = () => {
         "loading"
       ) : (
         <>
-          <h3 className="SelectTitle">Catégories</h3>
+          {/* Adding the “nos-realisations” anchor */}
+          <h3 className="SelectTitle" id="nos-realisations">
+            Catégories
+          </h3>
           <Select
             selection={Array.from(typeList)}
             onChange={(value) => (value ? changeType(value) : changeType(null))}

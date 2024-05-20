@@ -8,15 +8,17 @@ const Slider = () => {
   const { data } = useData();
   const [index, setIndex] = useState(0);
   const byDateDesc = data?.focus.sort((evtA, evtB) =>
-    new Date(evtA.date) < new Date(evtB.date) ? -1 : 1
+    new Date(evtA.date) > new Date(evtB.date) ? -1 : 1
   );
+  // Fixing nextCard function
   const nextCard = () => {
     setTimeout(
       () =>
         setIndex(
-          index < byDateDesc.length - 1
-            ? index + 1
-            : index - byDateDesc.length + 1
+          byDateDesc !== undefined &&
+            (index < byDateDesc.length - 1
+              ? index + 1
+              : index - byDateDesc.length + 1)
         ),
       5000
     );
@@ -27,7 +29,8 @@ const Slider = () => {
   return (
     <div className="SlideCardList">
       {byDateDesc?.map((event, idx) => (
-        <div key={event.id}>
+        // Fixing the key of each rendered div
+        <div key={Math.random()}>
           <div
             className={`SlideCard SlideCard--${
               index === idx ? "display" : "hide"
@@ -46,9 +49,11 @@ const Slider = () => {
             <div className="SlideCard__pagination">
               {byDateDesc.map((_, radioIdx) => (
                 <input
-                  key={event.date}
+                  // Fixing the key of each rendered input
+                  key={Math.random()}
                   type="radio"
                   name="radio-button"
+                  // Fixing the input by adding readOnly property and modify checked property
                   readOnly
                   checked={index === radioIdx}
                 />
