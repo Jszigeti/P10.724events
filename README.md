@@ -1,8 +1,8 @@
-# 724 Events
+# Projet 9 - 724 Events
 
 ## Description
 
-L'application est le site d'une agence evenementielle.
+Debogage d'une app React - Site d'une agence evenementielle
 
 ## Pre-requis
 
